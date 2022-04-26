@@ -56,7 +56,7 @@ AppBar customAppBar(BuildContext context, title) {
     flexibleSpace: Column(
       children: [
         Container(
-         // height: 190.h,
+          // height: 190.h,
           decoration: BoxDecoration(
             color: themeColor,
             borderRadius: BorderRadius.only(
@@ -99,7 +99,7 @@ AppBar customAppBar(BuildContext context, title) {
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
-                              fontFamily: 'Ubuntu')),
+                              fontFamily: 'Poppins')),
                       SizedBox(
                         width: 40,
                       ),

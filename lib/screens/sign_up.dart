@@ -226,238 +226,242 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     left: MediaQuery.of(context).size.width * 0.07,
                     right: MediaQuery.of(context).size.width * 0.07,
                     top: MediaQuery.of(context).size.height * 0.02),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height * 0.00,
-                        // bottom: MediaQuery.of(context).size.width *0.04
-                      ),
-                      child: Text(Email.tr,
-                          style: MyTextStyle.poppins().copyWith(
-                              color: themeColor,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.bold,
-                              fontSize:
-                                  MediaQuery.of(context).size.width * 0.04)),
-                    ),
-                    TextFormField(
-                        controller: _authProvider.emailController,
-                        textAlignVertical: TextAlignVertical.center,
-                        textAlign: TextAlign.left,
-                        keyboardType: TextInputType.emailAddress,
-                        // textCapitalization: TextCapitalization.words,
-                        maxLines: 1,
-                        validator: MultiValidator([
-                          _authProvider.requiredValidator,
-                          _authProvider.emailValidator,
-                        ]),
-                        style: const TextStyle(
-                          fontSize: 13,
-                          fontFamily: 'Poppins',
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.00,
+                          // bottom: MediaQuery.of(context).size.width *0.04
                         ),
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.only(
-                            top: MediaQuery.of(context).size.height *
-                                0.01, // HERE THE IMPORTANT PART
-                          ),
-                          prefixIcon: Image.asset(
-                            messageimage,
-                            scale: 2.7,
-                          ),
-                          labelStyle: const TextStyle(),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(color: themeColor),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: themeColor),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: themeColor),
-                          ),
-                          hintText: Your_Email.tr,
-                          // labelText:"Your Name"
-                        )),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height * 0.02,
-                        // bottom: MediaQuery.of(context).size.width *0.04
-                      ),
-                      child: Text(CreateNewPassword.tr,
-                          style: MyTextStyle.poppins().copyWith(
-                              color: themeColor,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.bold,
-                              fontSize:
-                                  MediaQuery.of(context).size.width * 0.04)),
-                    ),
-                    TextFormField(
-                        controller: _authProvider.passwordController,
-                        textAlignVertical: TextAlignVertical.center,
-                        textAlign: TextAlign.left,
-                        keyboardType: TextInputType.text,
-                        // obscureText: value.passObscure ? false : true,
-
-                        // textCapitalization: TextCapitalization.words,
-                        maxLines: 1,
-                        style: const TextStyle(
-                          fontSize: 13,
-                          fontFamily: 'Poppins',
-                        ),
-                        validator: MultiValidator([
-                          _authProvider.requiredValidator,
-                          _authProvider.passwordValidator,
-                        ]),
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.only(
-                            top: MediaQuery.of(context).size.height *
-                                0.01, // HERE THE IMPORTANT PART
-                          ),
-                          // suffixIcon: InkWell(
-                          //     onTap: () {
-                          //       value.setPassObscure(!passObscure);
-                          //     },
-                          //     child: value.passObscure
-                          //         ? const Icon(Icons.visibility_off)
-                          //         : const Icon(Icons.visibility)),
-                          prefixIcon: Image.asset(lockimage, scale: 2.7),
-                          labelStyle: const TextStyle(),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(color: themeColor),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: themeColor),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: themeColor),
-                          ),
-                          hintText: Your_password.tr,
-                          // labelText:"Your Name"
-                        )),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height * 0.02,
-                        // bottom: MediaQuery.of(context).size.width *0.04
-                      ),
-                      child: Text(Phonenumber.tr,
-                          style: MyTextStyle.poppins().copyWith(
-                              color: themeColor,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.bold,
-                              fontSize:
-                                  MediaQuery.of(context).size.width * 0.04)),
-                    ),
-                    TextFormField(
-                        controller: _authProvider.phoneNumberController,
-                        textAlignVertical: TextAlignVertical.center,
-                        textAlign: TextAlign.left,
-                        maxLines: 1,
-                        style: const TextStyle(
-                          fontSize: 13,
-                          fontFamily: 'Poppins',
-                        ),
-                        keyboardType: TextInputType.number,
-                        validator: MultiValidator([
-                          _authProvider.requiredValidator,
-                          MinLengthValidator(10,
-                              errorText: 'Enter valid 10 digits number'),
-                        ]),
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.only(
-                            top: MediaQuery.of(context).size.height *
-                                0.01, // HERE THE IMPORTANT PART
-                          ),
-
-                          prefixIcon: SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.03,
-                            child: CountryCodePicker(
-                              textOverflow: TextOverflow.visible,
-                              padding: EdgeInsets.only(
-                                top: MediaQuery.of(context).size.height * 0.003,
-                                bottom:
-                                    MediaQuery.of(context).size.height * 0.006,
-                              ),
-                              onChanged: (code) {
-                                countryCode = code;
-                              },
-                              initialSelection: countryCode.dialCode,
-                              // optional. Shows only country name and flag
-                              showCountryOnly: true,
-                              // optional. Shows only country name and flag when popup is closed.
-                              showOnlyCountryWhenClosed: false,
-                              // optional. aligns the flag and the Text left
-                              alignLeft: false,
-                            ),
-                          ),
-                          labelStyle: const TextStyle(),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(color: themeColor),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: themeColor),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: themeColor),
-                          ),
-                          hintText: "XXX-XXX-XXX",
-                          // labelText:"Your Name"
-                        )),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.037,
-                    ),
-                    loading
-                        ? Center(
-                            child: CircularProgressIndicator(),
-                          )
-                        : Center(
-                            child: SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.07,
-                              width: MediaQuery.of(context).size.width * 0.65,
-                              child: MaterialButton(
-                                elevation: 5,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5)),
-                                onPressed: () async {
-                                  if (_formKey.currentState!.validate()) {
-                                    print("Validation not ");
-                                    if (_image == null) {
-                                      MyMotionToast.warning(
-                                          context,
-                                          "Image Required".tr,
-                                          "Add your Profile image".tr);
-                                    } else {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: ((context) =>
-                                                  DriverVehicleDetailScreen(
-                                                    userImg: _image,
-                                                  ))));
-                                    }
-                                  } else {
-                                    print("Validation Okay");
-
-                                    // showBottomSheet(context);
-                                    // uploadImageToFirebase();
-                                    // await _sendOTP();
-                                  }
-                                },
+                        child: Text(Email.tr,
+                            style: MyTextStyle.poppins().copyWith(
                                 color: themeColor,
-                                child: Text(
-                                  VehicleInformation.toUpperCase().tr,
-                                  style: MyTextStyle.roboto().copyWith(
-                                      color: Colors.white,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.bold,
-                                      fontSize:
-                                          MediaQuery.of(context).size.width *
-                                              0.045),
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.bold,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.04)),
+                      ),
+                      TextFormField(
+                          controller: _authProvider.emailController,
+                          textAlignVertical: TextAlignVertical.center,
+                          textAlign: TextAlign.left,
+                          keyboardType: TextInputType.emailAddress,
+                          // textCapitalization: TextCapitalization.words,
+                          maxLines: 1,
+                          validator: MultiValidator([
+                            _authProvider.requiredValidator,
+                            _authProvider.emailValidator,
+                          ]),
+                          style: const TextStyle(
+                            fontSize: 13,
+                            fontFamily: 'Poppins',
+                          ),
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(
+                              top: MediaQuery.of(context).size.height *
+                                  0.01, // HERE THE IMPORTANT PART
+                            ),
+                            prefixIcon: Image.asset(
+                              messageimage,
+                              scale: 2.7,
+                            ),
+                            labelStyle: const TextStyle(),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(color: themeColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: themeColor),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: themeColor),
+                            ),
+                            hintText: Your_Email.tr,
+                            // labelText:"Your Name"
+                          )),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.02,
+                          // bottom: MediaQuery.of(context).size.width *0.04
+                        ),
+                        child: Text(CreateNewPassword.tr,
+                            style: MyTextStyle.poppins().copyWith(
+                                color: themeColor,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.bold,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.04)),
+                      ),
+                      TextFormField(
+                          controller: _authProvider.passwordController,
+                          textAlignVertical: TextAlignVertical.center,
+                          textAlign: TextAlign.left,
+                          keyboardType: TextInputType.text,
+                          // obscureText: value.passObscure ? false : true,
+
+                          // textCapitalization: TextCapitalization.words,
+                          maxLines: 1,
+                          style: const TextStyle(
+                            fontSize: 13,
+                            fontFamily: 'Poppins',
+                          ),
+                          validator: MultiValidator([
+                            _authProvider.requiredValidator,
+                            _authProvider.passwordValidator,
+                          ]),
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(
+                              top: MediaQuery.of(context).size.height *
+                                  0.01, // HERE THE IMPORTANT PART
+                            ),
+                            // suffixIcon: InkWell(
+                            //     onTap: () {
+                            //       value.setPassObscure(!passObscure);
+                            //     },
+                            //     child: value.passObscure
+                            //         ? const Icon(Icons.visibility_off)
+                            //         : const Icon(Icons.visibility)),
+                            prefixIcon: Image.asset(lockimage, scale: 2.7),
+                            labelStyle: const TextStyle(),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(color: themeColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: themeColor),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: themeColor),
+                            ),
+                            hintText: Your_password.tr,
+                            // labelText:"Your Name"
+                          )),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.02,
+                          // bottom: MediaQuery.of(context).size.width *0.04
+                        ),
+                        child: Text(Phonenumber.tr,
+                            style: MyTextStyle.poppins().copyWith(
+                                color: themeColor,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.bold,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.04)),
+                      ),
+                      TextFormField(
+                          controller: _authProvider.phoneNumberController,
+                          textAlignVertical: TextAlignVertical.center,
+                          textAlign: TextAlign.left,
+                          maxLines: 1,
+                          style: const TextStyle(
+                            fontSize: 13,
+                            fontFamily: 'Poppins',
+                          ),
+                          keyboardType: TextInputType.number,
+                          validator: MultiValidator([
+                            _authProvider.requiredValidator,
+                            MinLengthValidator(10,
+                                errorText: 'Enter valid 10 digits number'),
+                          ]),
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(
+                              top: MediaQuery.of(context).size.height *
+                                  0.01, // HERE THE IMPORTANT PART
+                            ),
+
+                            prefixIcon: SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.03,
+                              child: CountryCodePicker(
+                                textOverflow: TextOverflow.visible,
+                                padding: EdgeInsets.only(
+                                  top: MediaQuery.of(context).size.height *
+                                      0.003,
+                                  bottom: MediaQuery.of(context).size.height *
+                                      0.006,
+                                ),
+                                onChanged: (code) {
+                                  countryCode = code;
+                                },
+                                initialSelection: countryCode.dialCode,
+                                // optional. Shows only country name and flag
+                                showCountryOnly: true,
+                                // optional. Shows only country name and flag when popup is closed.
+                                showOnlyCountryWhenClosed: false,
+                                // optional. aligns the flag and the Text left
+                                alignLeft: false,
+                              ),
+                            ),
+                            labelStyle: const TextStyle(),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(color: themeColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: themeColor),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: themeColor),
+                            ),
+                            hintText: "XXX-XXX-XXX",
+                            // labelText:"Your Name"
+                          )),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.037,
+                      ),
+                      loading
+                          ? Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : Center(
+                              child: SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.07,
+                                width: MediaQuery.of(context).size.width * 0.65,
+                                child: MaterialButton(
+                                  elevation: 5,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5)),
+                                  onPressed: () async {
+                                    if (_formKey.currentState!.validate()) {
+                                      print("Validation not ");
+                                      if (_image == null) {
+                                        MyMotionToast.warning(
+                                            context,
+                                            "Image Required".tr,
+                                            "Add your Profile image".tr);
+                                      } else {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: ((context) =>
+                                                    DriverVehicleDetailScreen(
+                                                      userImg: _image,
+                                                    ))));
+                                      }
+                                    } else {
+                                      print("Validation Okay");
+
+                                      // showBottomSheet(context);
+                                      // uploadImageToFirebase();
+                                      // await _sendOTP();
+                                    }
+                                  },
+                                  color: themeColor,
+                                  child: Text(
+                                    VehicleInformation.toUpperCase().tr,
+                                    style: MyTextStyle.roboto().copyWith(
+                                        color: Colors.white,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.bold,
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.045),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

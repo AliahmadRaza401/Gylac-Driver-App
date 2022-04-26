@@ -84,10 +84,14 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
                         ),
                       ),
                       loading
-                          ? CircularProgressIndicator(
-                              color: Colors.orange,
+                          ? Container(
+                              child: Center(
+                                child: CircularProgressIndicator(
+                                  color: Colors.orange,
+                                ),
+                              ),
                             )
-                          : userProvider.driverModel!.status == "pending"
+                          : userProvider.driverModel!.status == "approved"
                               ? ordersBody(context)
                               : showAlertSheet(),
                     ],
@@ -1063,7 +1067,7 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  "Sorry! your document is under review wait until your profile approved",
+                  "Sorry! your document is under \nreview wait until your profile \napproved",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: MediaQuery.of(context).size.height * 0.020,

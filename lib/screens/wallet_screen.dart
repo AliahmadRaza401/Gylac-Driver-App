@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:driver_app/utils/app_route.dart';
 import 'package:driver_app/utils/color.dart';
+import 'package:driver_app/widgets/appbar_custome.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -48,30 +49,32 @@ class _WalletScreenState extends State<WalletScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: InkWell(
-            onTap: () {
-              AppRoutes.pop(context);
-              // scaffoldState.currentState!.openDrawer();
-            },
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: Image.asset(
-                'asset/appMenu.png',
-                height: 70.h,
-              ),
-            ),
-          ),
-          title: Text(
-            "My wallet".tr,
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          ),
-          centerTitle: true,
-          backgroundColor: orange,
-          elevation: 0,
-        ),
+        appBar: customAppBar(context, "My wallet".tr),
+        // appBar: AppBar(
+        //   leading: InkWell(
+        //     onTap: () {
+        //       AppRoutes.pop(context);
+        //       // scaffoldState.currentState!.openDrawer();
+        //     },
+        //     child: Container(
+        //       padding: EdgeInsets.all(10),
+        //       child: Image.asset(
+        //         'asset/appMenu.png',
+        //         height: 70.h,
+        //       ),
+        //     ),
+        //   ),
+        //   title: Text(
+        //     "My wallet".tr,
+        //     style: TextStyle(
+        //       color: Colors.white,
+        //     ),
+        //   ),
+        //   centerTitle: true,
+        //   backgroundColor: orange,
+        //   elevation: 0,
+        // ),
+
         body: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,

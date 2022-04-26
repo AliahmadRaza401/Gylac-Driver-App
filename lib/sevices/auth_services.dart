@@ -200,7 +200,7 @@ class AuthServices {
       orderCount: 0,
       status: 'pending',
       wallet: 0,
-      level: 0,
+      level: 1,
     );
 
     await firebaseFirestore.collection("drivers").doc(user!.uid).set({

@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:onboarding/onboarding.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -78,10 +77,13 @@ class _MyAppState extends State<MyApp> {
         return MultiProvider(
           providers: multiProvider,
           child: GetMaterialApp(
+              theme: ThemeData(fontFamily: 'Poppins'),
               debugShowCheckedModeBanner: false,
               translations: Messages(), // your translations
-              locale: const Locale('en', 'US'), // translations will be displayed in that locale
-              fallbackLocale: const Locale('en', 'US'), // specify the fallback local
+              locale: const Locale(
+                  'en', 'US'), // translations will be displayed in that locale
+              fallbackLocale:
+                  const Locale('en', 'US'), // specify the fallback local
               home: SplashScreen()),
         );
       },

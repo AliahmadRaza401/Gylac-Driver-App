@@ -123,19 +123,22 @@ class _DriverDrawerState extends State<DriverDrawer> {
                                                 0.04,
                                       ),
                                     ),
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          left: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              .04),
-                                      child: CircleAvatar(
-                                        radius: 14,
-                                        backgroundColor: Colors.transparent,
-                                        backgroundImage:
-                                            AssetImage(verified_driver),
-                                      ),
-                                    )
+                                    userProvider.driverModel!.level != 0
+                                        ? Padding(
+                                            padding: EdgeInsets.only(
+                                                left: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .04),
+                                            child: CircleAvatar(
+                                              radius: 14,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              backgroundImage:
+                                                  AssetImage(verified_driver),
+                                            ),
+                                          )
+                                        : SizedBox()
                                   ],
                                 ),
                                 Padding(
@@ -167,7 +170,10 @@ class _DriverDrawerState extends State<DriverDrawer> {
                                                       color: purpleColor,
                                                       border: Border.all(
                                                           color: Colors.white)),
-                                                  child: Text("2",
+                                                  child: Text(
+                                                      userProvider
+                                                          .driverModel!.level
+                                                          .toString(),
                                                       style: TextStyle(
                                                           color: Colors.white,
                                                           fontFamily:
@@ -180,7 +186,26 @@ class _DriverDrawerState extends State<DriverDrawer> {
                                                                   .width *
                                                               0.03)),
                                                 )),
-                                            Text(leveltwo,
+                                            Text(
+                                                userProvider.driverModel!
+                                                            .level ==
+                                                        0
+                                                    ? "New Driver"
+                                                    : userProvider.driverModel!
+                                                                .level ==
+                                                            1
+                                                        ? "Level 1"
+                                                        : userProvider
+                                                                    .driverModel!
+                                                                    .level ==
+                                                                2
+                                                            ? "Level 2"
+                                                            : userProvider
+                                                                        .driverModel!
+                                                                        .level ==
+                                                                    3
+                                                                ? "Level 3"
+                                                                : " New Driver",
                                                 style: TextStyle(
                                                     color: purpleColor,
                                                     fontFamily: "Brand-Bold",
@@ -203,11 +228,14 @@ class _DriverDrawerState extends State<DriverDrawer> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          drawerHeaderItems(context, "0", hoursOnline.tr, time),
                           drawerHeaderItems(
-                              context, "10.2", hoursOnline.tr, time),
+                              context, "0 KM", totalDistance.tr, speed),
                           drawerHeaderItems(
-                              context, "30 KM", totalDistance.tr, speed),
-                          drawerHeaderItems(context, "20", totalJobs.tr, jobs),
+                              context,
+                              userProvider.driverModel!.orderCount.toString(),
+                              totalJobs.tr,
+                              jobs),
                         ],
                       )
                     ],
@@ -241,9 +269,12 @@ class _DriverDrawerState extends State<DriverDrawer> {
               drawerItems(context, home, hometext.tr, () {
                 Navigator.of(context).pop();
               }),
-              drawerItemChat(context, messageimage, chat.tr, () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => ChatList()));
+              // drawerItemChat(context, messageimage, chat.tr, () {
+              //   Navigator.of(context)
+              //       .push(MaterialPageRoute(builder: (context) => ChatList()));
+              // }),
+              drawerItems(context, wallet, chat.tr, () {
+                AppRoutes.push(context, ChatList());
               }),
               drawerItems(context, wallet, myWallet.tr, () {
                 AppRoutes.push(context, WalletScreen());
@@ -270,8 +301,10 @@ class _DriverDrawerState extends State<DriverDrawer> {
                       Text(
                         Language.tr,
                         style: MyTextStyle.poppins().copyWith(
-                            fontSize: MediaQuery.of(context).size.width * 0.04,
-                            fontWeight: FontWeight.bold),
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Poppins',
+                        ),
                       )
                     ],
                   ),
@@ -302,14 +335,14 @@ class _DriverDrawerState extends State<DriverDrawer> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.03,
               ),
-              drawerItems(context, 'asset/drawerIcons/settings.png',
-                  "Help & Support".tr, () {
+              drawerItems(context, 'asset/settings.png', "Help & Support".tr,
+                  () {
                 AppRoutes.push(context, HelpAndSupport());
               }),
               drawerItems(context, level, LevelInfo.tr, () {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => HomeLevelScreen(
-                          title: '1',
+                          title: userProvider.driverModel!.level.toString(),
                         )));
               }),
               drawerItems(context, logout, "Logout".tr, () {
@@ -386,8 +419,10 @@ class _DriverDrawerState extends State<DriverDrawer> {
                 Text(
                   title,
                   style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width * 0.04,
-                      fontWeight: FontWeight.bold),
+                    fontSize: MediaQuery.of(context).size.width * 0.04,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Poppins',
+                  ),
                 )
               ],
             ),

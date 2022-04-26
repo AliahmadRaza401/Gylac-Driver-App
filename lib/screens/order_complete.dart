@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:driver_app/providers/user_provider.dart';
 import 'package:driver_app/screens/home_screen.dart';
 import 'package:driver_app/sevices/fcm_services.dart';
+import 'package:driver_app/utils/motion_toast.dart';
+import 'package:driver_app/widgets/appbar_custome.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -62,7 +66,8 @@ class _OrderCompleteState extends State<OrderComplete> {
     } else {
       level = 0;
     }
-
+    log('level: $level');
+    log('orderCount: $orderCount');
     FirebaseFirestore.instance
         .collection("drivers")
         .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -75,11 +80,7 @@ class _OrderCompleteState extends State<OrderComplete> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Order Complete".tr),
-        centerTitle: true,
-        backgroundColor: Color(0xffFBB03B),
-      ),
+      appBar: customAppBar(context, "Order Complete".tr),
       body: SizedBox(
         width: double.infinity,
         height: double.infinity,
@@ -412,7 +413,7 @@ class _OrderCompleteState extends State<OrderComplete> {
                     "Rating Recived",
                     "Driver give $ratings start rating",
                   );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  // ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   updateDriverOrder();
                   Navigator.pushAndRemoveUntil(
                       context,
@@ -420,6 +421,8 @@ class _OrderCompleteState extends State<OrderComplete> {
                         builder: (context) => DriverHomeScreen(),
                       ),
                       (route) => false);
+                  MyMotionToast.success(
+                      context, "Complete", "Order Complete Successfully");
                 });
               },
               child: Container(

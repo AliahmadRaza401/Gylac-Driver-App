@@ -71,7 +71,13 @@ class _OrderDetailState extends State<OrderDetail> {
             ),
           ),
         ),
-        title: Text(OrderDetails.tr),
+        title: Text(
+          OrderDetails.tr,
+          style: TextStyle(
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: Container(
         padding: EdgeInsets.all(10),
@@ -122,8 +128,15 @@ class _OrderDetailState extends State<OrderDetail> {
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    smallDetailsContainer(context, SentiarParis,
-                                        "11m.20s", Arrondisment, "4.8KM"),
+                                    smallDetailsContainer(
+                                      context,
+                                      widget.orderData["pickupEmail"]
+                                          .toString(),
+                                      widget.orderData["duration"].toString(),
+                                      widget.orderData["pickupAddress"]
+                                          .toString(),
+                                      widget.orderData["distance"].toString(),
+                                    ),
                                   ],
                                 ),
                                 Column(
@@ -223,8 +236,15 @@ class _OrderDetailState extends State<OrderDetail> {
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    smallDetailsContainer(context, SentiarParis,
-                                        "11m.20s", Arrondisment, "4.8KM"),
+                                    smallDetailsContainer(
+                                      context,
+                                      widget.orderData["deliveryEmail"]
+                                          .toString(),
+                                      widget.orderData["duration"].toString(),
+                                      widget.orderData["deliveryAddress"]
+                                          .toString(),
+                                      widget.orderData["distance"].toString(),
+                                    ),
                                   ],
                                 ),
                                 Column(
@@ -402,9 +422,10 @@ class _OrderDetailState extends State<OrderDetail> {
                                             MediaQuery.of(context).size.height *
                                                 0.07,
                                         foregroundColor: Colors.white,
-                                        text: "PICKUP AT LOCATION".tr,
+                                        text: "DELIVER AT LOCATION".tr,
                                         textStyle: TextStyle(
                                             color: Colors.white,
+                                            fontFamily: 'Roboto',
                                             fontSize: MediaQuery.of(context)
                                                     .size
                                                     .width *
@@ -507,7 +528,7 @@ class _OrderDetailState extends State<OrderDetail> {
                     ParcelName.tr,
                     style: MyTextStyle.poppins().copyWith(
                         fontSize: MediaQuery.of(context).size.height * 0.018,
-                        color: Colors.black54),
+                        color: Colors.black),
                   ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.02,
@@ -516,7 +537,7 @@ class _OrderDetailState extends State<OrderDetail> {
                     Weight.tr,
                     style: MyTextStyle.poppins().copyWith(
                       fontSize: MediaQuery.of(context).size.height * 0.018,
-                      color: Colors.black54,
+                      color: Colors.black,
                     ),
                   ),
                 ],
@@ -528,7 +549,7 @@ class _OrderDetailState extends State<OrderDetail> {
                     parcelName,
                     style: MyTextStyle.poppins().copyWith(
                       fontSize: MediaQuery.of(context).size.height * 0.018,
-                      color: Colors.black54,
+                      color: Colors.black,
                     ),
                   ),
                   SizedBox(
@@ -538,7 +559,7 @@ class _OrderDetailState extends State<OrderDetail> {
                     weight,
                     style: MyTextStyle.poppins().copyWith(
                       fontSize: MediaQuery.of(context).size.height * 0.018,
-                      color: Colors.black54,
+                      color: Colors.black,
                     ),
                   ),
                 ],
@@ -572,7 +593,7 @@ class _OrderDetailState extends State<OrderDetail> {
                             style: MyTextStyle.poppins().copyWith(
                               fontSize:
                                   MediaQuery.of(context).size.height * 0.014,
-                              color: Colors.black54,
+                              color: Colors.black,
                             )),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.01,
@@ -581,7 +602,7 @@ class _OrderDetailState extends State<OrderDetail> {
                             style: MyTextStyle.poppins().copyWith(
                               fontSize:
                                   MediaQuery.of(context).size.height * 0.014,
-                              color: Colors.black54,
+                              color: Colors.black,
                             ))
                       ],
                     ),
@@ -630,7 +651,7 @@ class _OrderDetailState extends State<OrderDetail> {
                           style: MyTextStyle.poppins().copyWith(
                             fontSize:
                                 MediaQuery.of(context).size.height * 0.014,
-                            color: Colors.black54,
+                            color: Colors.black,
                           )),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.01,
@@ -642,7 +663,7 @@ class _OrderDetailState extends State<OrderDetail> {
                             style: MyTextStyle.poppins().copyWith(
                               fontSize:
                                   MediaQuery.of(context).size.height * 0.014,
-                              color: Colors.black54,
+                              color: Colors.black,
                             )),
                       )
                     ],
@@ -759,6 +780,7 @@ class _OrderDetailState extends State<OrderDetail> {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: MyTextStyle.poppins().copyWith(
+                            fontFamily: 'Roboto',
                             color: Colors.black,
                             fontSize: MediaQuery.of(context).size.width * 0.04,
                             fontWeight: FontWeight.bold,
@@ -1059,9 +1081,16 @@ class _OrderDetailState extends State<OrderDetail> {
                       fontSize: MediaQuery.of(context).size.width * 0.032,
                       fontWeight: FontWeight.bold),
                 ),
+                SizedBox(
+                  height: 10.h,
+                ),
                 Container(
                   // color: Colors.amber,
                   width: MediaQuery.of(context).size.width * 0.8,
+                  height: MediaQuery.of(context).size.height * 0.13,
+                  padding: EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                      border: Border.all(width: 1, color: Color(0xffD4AF37))),
                   child: Text(
                     // "asdfk lkasd fl ilsdjf  lasjdf l jlsdfk lkasjdf  lkasjdf l llasdf",
                     widget.orderData['pickupParcelDesc'].toString(),

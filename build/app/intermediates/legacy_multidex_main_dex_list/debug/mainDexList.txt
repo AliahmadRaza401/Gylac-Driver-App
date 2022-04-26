@@ -81,6 +81,13 @@ androidx/annotation/XmlRes.class
 androidx/annotation/experimental/Experimental$Level.class
 androidx/annotation/experimental/Experimental.class
 androidx/annotation/experimental/UseExperimental.class
+androidx/appcompat/app/ActionBar$DisplayOptions.class
+androidx/appcompat/app/ActionBar$NavigationMode.class
+androidx/appcompat/app/AppCompatDelegate$NightMode.class
+androidx/appcompat/graphics/drawable/DrawerArrowDrawable$ArrowDirection.class
+androidx/appcompat/view/menu/CascadingMenuPopup$HorizPosition.class
+androidx/appcompat/widget/LinearLayoutCompat$DividerMode.class
+androidx/appcompat/widget/LinearLayoutCompat$OrientationMode.class
 androidx/browser/browseractions/BrowserActionsIntent$BrowserActionsItemId.class
 androidx/browser/browseractions/BrowserActionsIntent$BrowserActionsUrlType.class
 androidx/browser/customtabs/CustomTabsService$Relation.class
@@ -123,7 +130,10 @@ androidx/core/view/accessibility/AccessibilityEventCompat$ContentChangeType.clas
 androidx/core/widget/TextViewCompat$AutoSizeTextType.class
 androidx/exifinterface/media/ExifInterface$ExifStreamType.class
 androidx/exifinterface/media/ExifInterface$IfdType.class
+androidx/fragment/app/FragmentStateManagerControl.class
+androidx/lifecycle/Lifecycle$1.class
 androidx/lifecycle/Lifecycle$Event.class
+androidx/lifecycle/Lifecycle$State.class
 androidx/lifecycle/OnLifecycleEvent.class
 androidx/media/AudioAttributesCompat$AttributeContentType.class
 androidx/media/AudioAttributesCompat$AttributeUsage.class
@@ -144,6 +154,9 @@ androidx/multidex/MultiDexExtractor.class
 androidx/multidex/ZipUtil$CentralDirectory.class
 androidx/multidex/ZipUtil.class
 androidx/swiperefreshlayout/widget/CircularProgressDrawable$ProgressDrawableSize.class
+androidx/transition/Slide$GravityFlag.class
+androidx/transition/Transition$MatchOrder.class
+androidx/transition/Visibility$Mode.class
 androidx/versionedparcelable/NonParcelField.class
 androidx/versionedparcelable/ParcelField.class
 androidx/versionedparcelable/VersionedParcelize.class
@@ -336,6 +349,9 @@ com/google/j2objc/annotations/WeakOuter.class
 com/google/protobuf/CanIgnoreReturnValue.class
 com/google/protobuf/CheckReturnValue.class
 com/google/protobuf/ExperimentalApi.class
+com/yalantis/ucrop/UCropActivity$GestureTypes.class
+com/yalantis/ucrop/UCropFragment$GestureTypes.class
+com/yalantis/ucrop/view/OverlayView$FreestyleMode.class
 io/flutter/FlutterInjector.class
 io/flutter/app/FlutterApplication.class
 io/flutter/embedding/engine/loader/FlutterLoader.class
@@ -643,6 +659,7 @@ kotlinx/coroutines/scheduling/ExperimentalCoroutineDispatcher.class
 kotlinx/coroutines/selects/SelectClause0.class
 kotlinx/coroutines/test/TestCoroutineContext.class
 kotlinx/coroutines/test/TestCoroutineContextKt.class
+okhttp3/internal/annotations/EverythingIsNonNull.class
 org/apache/http/annotation/Contract.class
 org/apache/http/annotation/Experimental.class
 org/apache/http/annotation/Obsolete.class

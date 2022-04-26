@@ -11,6 +11,7 @@ import 'package:driver_app/screens/map/map_widget.dart';
 import 'package:driver_app/sevices/fcm_services.dart';
 import 'package:driver_app/utils/constants.dart';
 import 'package:driver_app/utils/motion_toast.dart';
+import 'package:driver_app/widgets/appbar_custome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
@@ -110,9 +111,7 @@ class _GoMapState extends State<GoMap> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xffFBB03B),
-      ),
+      appBar: customAppBar(context, "Tracking"),
       body: SafeArea(
         child: Stack(
           children: <Widget>[
@@ -190,7 +189,7 @@ class _GoMapState extends State<GoMap> {
             calculateHarvesineDistanceInKM(liveLocation, distination);
         rideTime = calculateETAInMinutes(ridedistance, 30);
 
-        if (ridedistance == 0 || ridedistance < .10) {
+        if (ridedistance == 0 || ridedistance < 5000000000000) {
           if (widget.isPickup == false) {
             log("Driver Reached PickUp Location*****************");
             MapServices.updateTrackStatusInDB(widget.driverID, "Picked");
@@ -210,8 +209,8 @@ class _GoMapState extends State<GoMap> {
             );
             Navigator.of(context).pop(true);
 
-            MyMotionToast.success(
-                context, "Pickup Location".tr, "You Reached PickUp location".tr);
+            MyMotionToast.success(context, "Pickup Location".tr,
+                "You Reached PickUp location".tr);
           } else if (widget.isPickup == true) {
             log("Driver Reached Delivery Location*****************");
             MapServices.updateTrackStatusInDB(widget.driverID, "Delivered");
@@ -233,8 +232,8 @@ class _GoMapState extends State<GoMap> {
               ),
             );
 
-            MyMotionToast.success(
-                context, "Delivery Location".tr, "You Reached Delivery location".tr);
+            MyMotionToast.success(context, "Delivery Location".tr,
+                "You Reached Delivery location".tr);
           }
         }
       });
