@@ -189,7 +189,7 @@ class _GoMapState extends State<GoMap> {
             calculateHarvesineDistanceInKM(liveLocation, distination);
         rideTime = calculateETAInMinutes(ridedistance, 30);
 
-        if (ridedistance == 0 || ridedistance < 5000000000000) {
+        if (ridedistance == 0 || ridedistance < 0.10) {
           if (widget.isPickup == false) {
             log("Driver Reached PickUp Location*****************");
             MapServices.updateTrackStatusInDB(widget.driverID, "Picked");

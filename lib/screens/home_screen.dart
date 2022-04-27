@@ -85,6 +85,7 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
                       ),
                       loading
                           ? Container(
+                              height: MediaQuery.of(context).size.height * 0.7,
                               child: Center(
                                 child: CircularProgressIndicator(
                                   color: Colors.orange,
@@ -167,9 +168,11 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
                 return const Text('Oops! Something went wrong');
               }
               if (!snapshot.hasData) {
-                return const Center(
-                  child: CircularProgressIndicator(
-                    color: orange,
+                return Container(
+                  child: const Center(
+                    child: CircularProgressIndicator(
+                      color: orange,
+                    ),
                   ),
                 );
               }

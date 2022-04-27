@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:driver_app/screens/login.dart';
 import 'package:driver_app/sevices/auth_services.dart';
 import 'package:driver_app/sevices/image_piker.dart';
+import 'package:driver_app/utils/app_route.dart';
 import 'package:driver_app/utils/motion_toast.dart';
 import 'package:driver_app/utils/strings.dart';
 import 'package:flutter/material.dart';
@@ -736,8 +737,7 @@ void showBottomSheetForDriver(BuildContext context) {
               const Spacer(),
               InkWell(
                 onTap: () async {
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => LoginPage()));
+                  AppRoutes.replace(context, LoginPage());
                 },
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.04,

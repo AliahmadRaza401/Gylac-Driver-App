@@ -58,13 +58,11 @@ class _OrderCompleteState extends State<OrderComplete> {
     int orderCount = userProvider.driverModel!.orderCount += 1;
 
     if (orderCount >= 20 && userProvider.driverModel!.wallet >= 500) {
-      level = 1;
-    } else if (orderCount >= 40 && userProvider.driverModel!.wallet >= 1000) {
       level = 2;
-    } else if (orderCount >= 80 && userProvider.driverModel!.wallet >= 2000) {
+    } else if (orderCount >= 60 && userProvider.driverModel!.wallet >= 2000) {
       level = 3;
     } else {
-      level = 0;
+      level;
     }
     log('level: $level');
     log('orderCount: $orderCount');

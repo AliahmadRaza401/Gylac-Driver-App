@@ -217,7 +217,7 @@ class AuthServices {
       'vehicleDesign': vehicleDesign,
       'vehicleChassisNumber': vehicleChassisNumber,
       'rating': 5.0,
-      'level': 0,
+      'level': 1,
       'wallet': 0,
       'orderCount': 0,
       'status': "pending",
@@ -225,6 +225,7 @@ class AuthServices {
     }).then((value) {
       _authProvider.isLoading(false);
       showBottomSheetForDriver(context);
+  
       // AppRoutes.push(context, LoginPage());
       _authProvider.carDesignController.clear();
       _authProvider.carDesignController.clear();

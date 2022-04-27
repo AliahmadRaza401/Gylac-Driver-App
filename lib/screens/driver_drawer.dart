@@ -94,7 +94,7 @@ class _DriverDrawerState extends State<DriverDrawer> {
                                                   color: Colors.white,
                                                   width: 2),
                                               borderRadius:
-                                                  BorderRadius.circular(30)),
+                                                  BorderRadius.circular(20)),
                                 ),
                               )
                             ],
@@ -266,23 +266,24 @@ class _DriverDrawerState extends State<DriverDrawer> {
               //   Navigator.of(context).push(
               //       MaterialPageRoute(builder: (context) => NewTaskScreen()));
               // }),
-              drawerItems(context, home, hometext.tr, () {
+              drawerItems(context, 'asset/drawerIcons/1.png', hometext.tr, () {
                 Navigator.of(context).pop();
               }),
               // drawerItemChat(context, messageimage, chat.tr, () {
               //   Navigator.of(context)
               //       .push(MaterialPageRoute(builder: (context) => ChatList()));
               // }),
-              drawerItems(context, wallet, chat.tr, () {
+              drawerItems(context, 'asset/drawerIcons/2.png', chat.tr, () {
                 AppRoutes.push(context, ChatList());
               }),
-              drawerItems(context, wallet, myWallet.tr, () {
+              drawerItems(context, 'asset/drawerIcons/2.png', myWallet.tr, () {
                 AppRoutes.push(context, WalletScreen());
               }),
-              drawerItems(context, history, History.tr, () {
+              drawerItems(context, 'asset/drawerIcons/3.png', History.tr, () {
                 AppRoutes.push(context, orderHistory());
               }),
-              drawerItems(context, bell, Notifications.tr, () {}),
+              drawerItems(
+                  context, 'asset/drawerIcons/4.png', Notifications.tr, () {}),
               Container(
                 // height: MediaQuery.of(context).size.height * 0.07,
                 // color: Colors.green,
@@ -291,8 +292,9 @@ class _DriverDrawerState extends State<DriverDrawer> {
                   title: Row(
                     children: [
                       Image.asset(
-                        web,
-                        height: MediaQuery.of(context).size.height * 0.04,
+                        'asset/drawerIcons/5.png',
+                        height: MediaQuery.of(context).size.height * 0.03,
+                        width: MediaQuery.of(context).size.width * 0.08,
                         color: drawerIconColor,
                       ),
                       SizedBox(
@@ -335,17 +337,17 @@ class _DriverDrawerState extends State<DriverDrawer> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.03,
               ),
-              drawerItems(context, 'asset/settings.png', "Help & Support".tr,
-                  () {
+              drawerItems(
+                  context, 'asset/drawerIcons/6.png', "Help & Support".tr, () {
                 AppRoutes.push(context, HelpAndSupport());
               }),
-              drawerItems(context, level, LevelInfo.tr, () {
+              drawerItems(context, 'asset/drawerIcons/7.png', LevelInfo.tr, () {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => HomeLevelScreen(
                           title: userProvider.driverModel!.level.toString(),
                         )));
               }),
-              drawerItems(context, logout, "Logout".tr, () {
+              drawerItems(context, 'asset/drawerIcons/8.png', "Logout".tr, () {
                 AppRoutes.push(context, Intro());
                 SharedPrefServices.userLoggedIn(false);
               }),

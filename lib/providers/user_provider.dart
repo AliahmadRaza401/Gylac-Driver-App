@@ -59,6 +59,7 @@ class UserProvider extends ChangeNotifier {
                 }),
               });
     } catch (e) {
+      setLoading(false);
       print(e.toString());
       return null;
     }
