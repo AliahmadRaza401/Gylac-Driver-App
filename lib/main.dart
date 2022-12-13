@@ -73,7 +73,7 @@ class _MyAppState extends State<MyApp> {
       designSize: Size(1080, 2220),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: () {
+      builder: (_, context) {
         return MultiProvider(
           providers: multiProvider,
           child: GetMaterialApp(

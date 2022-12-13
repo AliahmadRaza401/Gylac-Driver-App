@@ -55,6 +55,8 @@ com/baseflow/geolocator/location/LocationServiceStatusReceiver.java
  com.baseflow.geolocator.location.LocationServiceStatusReceiver
 com/baseflow/geolocator/errors/ErrorCallback.java
  com.baseflow.geolocator.errors.ErrorCallback
+com/baseflow/geolocator/location/NmeaClient.java
+ com.baseflow.geolocator.location.NmeaClient
 com/baseflow/geolocator/errors/ErrorCodes.java
  com.baseflow.geolocator.errors.ErrorCodes
  com.baseflow.geolocator.errors.ErrorCodes$1

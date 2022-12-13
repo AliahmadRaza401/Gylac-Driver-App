@@ -22,6 +22,7 @@ attr fontVariationSettings
 attr fontWeight
 attr imageAspectRatio
 attr imageAspectRatioAdjust
+attr lStar
 attr nestedScrollViewStyle
 attr placeholderActivityName
 attr primaryActivityName
@@ -191,6 +192,7 @@ id text
 id text2
 id time
 id title
+id view_tree_lifecycle_owner
 id wide
 integer google_play_services_version
 integer status_bar_notification_info_maxnum
@@ -230,7 +232,7 @@ style Widget_Compat_NotificationActionText
 styleable ActivityFilter activityAction activityName
 styleable ActivityRule alwaysExpand
 styleable Capability queryPatterns shortcutMatchRequired
-styleable ColorStateListItem alpha android_alpha android_color
+styleable ColorStateListItem alpha android_alpha android_color android_lStar lStar
 styleable FontFamily fontProviderAuthority fontProviderCerts fontProviderFetchStrategy fontProviderFetchTimeout fontProviderPackage fontProviderQuery fontProviderSystemFontFamily
 styleable FontFamilyFont android_font android_fontStyle android_fontVariationSettings android_fontWeight android_ttcIndex font fontStyle fontVariationSettings fontWeight ttcIndex
 styleable GradientColor android_centerColor android_centerX android_centerY android_endColor android_endX android_endY android_gradientRadius android_startColor android_startX android_startY android_tileMode android_type

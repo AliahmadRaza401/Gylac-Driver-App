@@ -7,6 +7,7 @@ io/flutter/plugins/firebase/messaging/FlutterFirebaseMessagingBackgroundService.
 io/flutter/plugins/firebase/messaging/ContextHolder.java
  io.flutter.plugins.firebase.messaging.ContextHolder
 io/flutter/plugins/firebase/messaging/FlutterFirebaseMessagingUtils.java
+ io.flutter.plugins.firebase.messaging.ErrorCallback
  io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingUtils
 io/flutter/plugins/firebase/messaging/FlutterFirebaseMessagingPlugin.java
  io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingPlugin
@@ -24,6 +25,9 @@ io/flutter/plugins/firebase/messaging/JobIntentService.java
  io.flutter.plugins.firebase.messaging.JobIntentService$JobServiceEngineImpl$WrapperWorkItem
  io.flutter.plugins.firebase.messaging.JobIntentService$JobWorkEnqueuer
  io.flutter.plugins.firebase.messaging.JobIntentService$WorkEnqueuer
+io/flutter/plugins/firebase/messaging/FlutterFirebasePermissionManager.java
+ io.flutter.plugins.firebase.messaging.FlutterFirebasePermissionManager
+ io.flutter.plugins.firebase.messaging.FlutterFirebasePermissionManager$RequestPermissionsSuccessCallback
 io/flutter/plugins/firebase/messaging/FlutterFirebaseMessagingReceiver.java
  io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingReceiver
 io/flutter/plugins/firebase/messaging/FlutterFirebaseMessagingStore.java
