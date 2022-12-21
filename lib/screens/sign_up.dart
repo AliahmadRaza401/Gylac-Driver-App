@@ -10,6 +10,7 @@ import 'package:driver_app/utils/motion_toast.dart';
 
 import 'package:driver_app/utils/style.dart';
 import 'package:driver_app/widgets/custom_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -39,6 +40,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.initState();
     _authProvider = Provider.of<AuthProvider>(context, listen: false);
   }
+
+  bool otpLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -362,8 +365,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           keyboardType: TextInputType.number,
                           validator: MultiValidator([
                             _authProvider.requiredValidator,
-                            MinLengthValidator(10,
-                                errorText: 'Enter valid 10 digits number'),
                           ]),
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.only(
@@ -409,7 +410,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.037,
                       ),
-                      loading
+                      otpLoading
                           ? Center(
                               child: CircularProgressIndicator(),
                             )
@@ -431,19 +432,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                             "Image Required".tr,
                                             "Add your Profile image".tr);
                                       } else {
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: ((context) =>
-                                                    DriverVehicleDetailScreen(
-                                                      userImg: _image,
-                                                    ))));
+                                        _signInWithMobileNumber();
+                                        // Navigator.of(context).push(
+                                        //     MaterialPageRoute(
+                                        //         builder: ((context) =>
+                                        //             DriverVehicleDetailScreen(
+                                        //               userImg: _image,
+                                        //             ))));
                                       }
                                     } else {
                                       print("Validation Okay");
 
                                       // showBottomSheet(context);
                                       // uploadImageToFirebase();
-                                      // await _sendOTP();
+
                                     }
                                   },
                                   color: themeColor,
@@ -586,13 +588,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             colorBuilder: FixedColorBuilder(
                                 Color.fromRGBO(255, 255, 255, 1))),
                         // controller: _authProvider.pinCodeController,
+
                         onCodeChanged: (value) async {
+                          print('value: ${value}');
                           Customdialog.showDialog();
+
                           // await verifySignupOtp(
                           //   context,
                           //   _authProvider.pinCodeController.text,
                           //   _verificationId,
                           // );
+                        },
+                        onCodeSubmitted: (v) {
+                          setState(() {
+                            pinCode = v;
+                          });
+                          verifyOTp();
+                          print('v: ${v}');
                         },
                         codeLength: 6,
                       ),
@@ -634,7 +646,109 @@ class _SignUpScreenState extends State<SignUpScreen> {
         });
   }
 
+  String verificationID = '';
+  String pinCode = '';
+  _signInWithMobileNumber() async {
+    setState(() {
+      otpLoading = true;
+    });
+    UserCredential _credential;
+    //var valid = _formKey.currentState.validate();
+    User user;
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+
+    try {
+      await _auth.verifyPhoneNumber(
+        phoneNumber:
+            "${countryCode.dialCode}${_authProvider.phoneNumberController.text}",
+        verificationCompleted: (PhoneAuthCredential authCredential) async {},
+        verificationFailed: ((error) {
+          print(error);
+          setState(() {
+            otpSent = false;
+          });
+          MyMotionToast.error(
+            context,
+            "Error".tr,
+            error,
+          );
+        }),
+        codeSent: (String verificationId, [int? forceResendingToken]) {
+          setState(() {
+            verificationID = verificationId;
+            otpSent = true;
+            otpLoading = false;
+          });
+          showBottomSheet(context);
+          //show dialog to take input from the user
+          // showDialog(
+          //   context: context,
+          //   barrierDismissible: false,
+          //   builder: (context) => AlertDialog(
+          //     title: Text("Enter OTP"),
+          //     content: Column(
+          //       mainAxisSize: MainAxisSize.min,
+          //       children: <Widget>[
+          //         TextField(
+          //           controller: _codeController,
+          //         ),
+          //       ],
+          //     ),
+          //     actions: <Widget>[
+          //       ElevatedButton(
+          //         child: Text("Done"),
+          //         onPressed: () {
+          // FirebaseAuth auth = FirebaseAuth.instance;
+          // smsCode = _codeController.text.trim();
+          // PhoneAuthCredential _credential =
+          //     PhoneAuthProvider.credential(
+          //   verificationId: verificationId,
+          //   smsCode: smsCode,
+          // );
+          // auth.signInWithCredential(_credential).then((result) {
+          //   Navigator.of(context).pop();
+          // }).catchError((e) {
+          //   print(e);
+          // });
+          //         },
+          //       ),
+          //     ],
+          //   ),
+          // );
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {
+          verificationId = verificationId;
+          print('AUTORETRIVAL SECTION');
+          print(verificationId);
+          print("Timout");
+          setState(() {
+            otpSent = false;
+          });
+        },
+      );
+    } catch (e) {}
+  }
+
+  verifyOTp() {
+    FirebaseAuth auth = FirebaseAuth.instance;
+
+    PhoneAuthCredential _credential = PhoneAuthProvider.credential(
+      verificationId: verificationID,
+      smsCode: pinCode,
+    );
+    auth.signInWithCredential(_credential).then((result) {
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: ((context) => DriverVehicleDetailScreen(
+                userImg: _image,
+              ))));
+    }).catchError((e) {
+      print(e);
+    });
+  }
+
   // _sendOTP() async {
+  //   debugPrint(
+  //       ': ${"${countryCode.dialCode}${_authProvider.phoneNumberController.text}"}');
   //   await FirebaseAuth.instance.verifyPhoneNumber(
   //     phoneNumber:
   //         "${countryCode.dialCode}${_authProvider.phoneNumberController.text}",
@@ -655,47 +769,49 @@ class _SignUpScreenState extends State<SignUpScreen> {
   //   });
   // }
 
-  // void codeSent(String verificationId, int a) {
+  // codeSent(String verificationId, int? a) {
   //   setState(() {
   //     _verificationId = verificationId;
   //     otpSent = true;
   //   });
-  //   Customdialog.closeDialog();
+
   //   showBottomSheet(context);
   // }
 
+  // String _verificationId = '';
   // void verificationFailed(FirebaseAuthException exception) {
   //   setState(() {
   //     otpSent = false;
   //   });
-  //   Customdialog.closeDialog();
   // }
 
   // void verificationCompleted(PhoneAuthCredential credential) async {
   //   await FirebaseAuth.instance.signInWithCredential(credential);
   //   if (FirebaseAuth.instance.currentUser != null) {
-  //     Customdialog.closeDialog();
-  //     Get.to(() => const DriverVehicleDetailScreen(),
-  //         transition: Transition.leftToRightWithFade);
+  //     print("*********************************************");
+  //     //
+  //     // Get.to(() =>  DriverVehicleDetailScreen(),
+  //     //     transition: Transition.leftToRightWithFade);
   //   } else {}
   // }
 
   // Future verifySignupOtp(BuildContext context, String id, String otp) async {
   //   final AuthCredential credential =
   //       PhoneAuthProvider.credential(verificationId: id, smsCode: otp);
-  //   // FirebaseAuth _auth = FirebaseAuth.instance;
+  //   FirebaseAuth _auth = FirebaseAuth.instance;
 
   //   await _auth.signInWithCredential(credential).then((user) async {
   //     // User user = FirebaseAuth.instance.currentUser;
-  //     Customdialog.closeDialog();
-  //     Get.to(() => const DriverVehicleDetailScreen(),
-  //         transition: Transition.leftToRightWithFade);
+  //     //
+  //     // Get.to(() => const DriverVehicleDetailScreen(),
+  //     //     transition: Transition.leftToRightWithFade);
   //   }).onError((error, stackTrace) {
-  //     CustomSnackbar.showSnackBar(title: "Error", message: '$error');
-  //     Customdialog.closeDialog();
+  //     debugPrint('error: ${error}');
+  //     // CustomSnackbar.showSnackBar(title: "Error", message: '$error');
   //   }).catchError((e) async {
-  //     CustomSnackbar.showSnackBar(title: "Error", message: '$e');
-  //     Customdialog.closeDialog();
+  //     debugPrint('e: ${e}');
+  //     // CustomSnackbar.showSnackBar(title: "Error", message: '$e');
   //   });
   // }
+
 }
