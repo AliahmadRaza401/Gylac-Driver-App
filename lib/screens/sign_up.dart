@@ -6,6 +6,7 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:driver_app/providers/auth_provider.dart';
 import 'package:driver_app/screens/driver_vehicle_detail.dart';
 import 'package:driver_app/sevices/image_piker.dart';
+import 'package:driver_app/utils/app_route.dart';
 import 'package:driver_app/utils/motion_toast.dart';
 
 import 'package:driver_app/utils/style.dart';
@@ -432,7 +433,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                             "Image Required".tr,
                                             "Add your Profile image".tr);
                                       } else {
-                                        _signInWithMobileNumber();
+                                        // _signInWithMobileNumber();
+                                        showBottomSheet(context);
                                         // Navigator.of(context).push(
                                         //     MaterialPageRoute(
                                         //         builder: ((context) =>
@@ -610,32 +612,61 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                     const Spacer(),
-                    InkWell(
-                      onTap: () async {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: ((context) => DriverVehicleDetailScreen(
-                                  userImg: _image,
-                                ))));
-                      },
-                      child: Container(
-                        height: MediaQuery.of(context).size.height * 0.04,
-                        width: MediaQuery.of(context).size.width * 0.32,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(
-                                MediaQuery.of(context).size.height * 0.01)),
-                        child: Center(
-                          child: Text(
-                            RESEND_OTP,
-                            style: TextStyle(
-                                color: const Color(0xffFF0500),
-                                fontSize:
-                                    MediaQuery.of(context).size.height * 0.018,
-                                fontWeight: FontWeight.bold,
-                                decoration: TextDecoration.underline),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            verifyOTp();
+                          },
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * 0.04,
+                            width: MediaQuery.of(context).size.width * 0.32,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(
+                                    MediaQuery.of(context).size.height * 0.01)),
+                            child: Center(
+                              child: Text(
+                                "Verify_OTP",
+                                style: TextStyle(
+                                    color: const Color(0xffFF0500),
+                                    fontSize:
+                                        MediaQuery.of(context).size.height *
+                                            0.018,
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.underline),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                        InkWell(
+                          onTap: () async {
+                            _signInWithMobileNumber();
+                            AppRoutes.pop(context);
+                          },
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * 0.04,
+                            width: MediaQuery.of(context).size.width * 0.32,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(
+                                    MediaQuery.of(context).size.height * 0.01)),
+                            child: Center(
+                              child: Text(
+                                RESEND_OTP,
+                                style: TextStyle(
+                                    color: const Color(0xffFF0500),
+                                    fontSize:
+                                        MediaQuery.of(context).size.height *
+                                            0.018,
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.underline),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                   ],
