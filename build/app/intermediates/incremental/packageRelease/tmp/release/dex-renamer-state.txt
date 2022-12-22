@@ -1,4 +1,0 @@
-#Wed Apr 27 09:29:53 PKT 2022
-base.0=D\:\\Flutter Projects\\Gylac-Driver-App\\build\\app\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex
-renamed.0=classes.dex
-path.0=classes.dex
