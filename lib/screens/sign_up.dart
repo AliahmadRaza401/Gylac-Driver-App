@@ -413,7 +413,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       otpLoading
                           ? Center(
-                              child: CircularProgressIndicator(),
+                              child: CircularProgressIndicator(
+                                color: orange,
+                              ),
                             )
                           : Center(
                               child: SizedBox(
@@ -433,8 +435,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                             "Image Required".tr,
                                             "Add your Profile image".tr);
                                       } else {
-                                        // _signInWithMobileNumber();
-                                        showBottomSheet(context);
+                                        _signInWithMobileNumber();
+                                        // showBottomSheet(context);
                                         // Navigator.of(context).push(
                                         //     MaterialPageRoute(
                                         //         builder: ((context) =>
@@ -550,7 +552,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          Enter_OTP,
+                          "Enter OTP",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize:
@@ -593,6 +595,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                         onCodeChanged: (value) async {
                           print('value: ${value}');
+                          setState(() {
+                            pinCode = value.toString();
+                          });
                           Customdialog.showDialog();
 
                           // await verifySignupOtp(
@@ -602,9 +607,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           // );
                         },
                         onCodeSubmitted: (v) {
-                          setState(() {
-                            pinCode = v;
-                          });
                           verifyOTp();
                           print('v: ${v}');
                         },
@@ -628,7 +630,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     MediaQuery.of(context).size.height * 0.01)),
                             child: Center(
                               child: Text(
-                                "Verify_OTP",
+                                "Verify OTP",
                                 style: TextStyle(
                                     color: const Color(0xffFF0500),
                                     fontSize:
@@ -654,7 +656,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     MediaQuery.of(context).size.height * 0.01)),
                             child: Center(
                               child: Text(
-                                RESEND_OTP,
+                                "RESEND OTP",
                                 style: TextStyle(
                                     color: const Color(0xffFF0500),
                                     fontSize:
@@ -755,9 +757,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
           setState(() {
             otpSent = false;
           });
+          MyMotionToast.error(
+            context,
+            "Error".tr,
+            "Please try again, Timout",
+          );
         },
       );
-    } catch (e) {}
+    } catch (e) {
+      MyMotionToast.error(
+        context,
+        "Error".tr,
+        "Please try again",
+      );
+    }
   }
 
   verifyOTp() {
@@ -774,6 +787,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ))));
     }).catchError((e) {
       print(e);
+      MyMotionToast.error(
+        context,
+        "Error".tr,
+        "Invalid Otp",
+      );
     });
   }
 
