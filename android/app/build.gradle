@@ -29,6 +29,10 @@ apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 33
 
+    lintOptions {
+        checkReleaseBuilds false
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -46,7 +50,7 @@ android {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.example.driver_app"
         minSdkVersion 20
-        targetSdkVersion 31
+        targetSdkVersion 33
         multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
