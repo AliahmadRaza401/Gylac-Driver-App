@@ -552,7 +552,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          "Enter OTP",
+                          "Enter OTP".tr,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize:
@@ -630,7 +630,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     MediaQuery.of(context).size.height * 0.01)),
                             child: Center(
                               child: Text(
-                                "Verify OTP",
+                                "Verify OTP".tr,
                                 style: TextStyle(
                                     color: const Color(0xffFF0500),
                                     fontSize:
@@ -656,7 +656,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     MediaQuery.of(context).size.height * 0.01)),
                             child: Center(
                               child: Text(
-                                "RESEND OTP",
+                                "RESEND OTP".tr,
                                 style: TextStyle(
                                     color: const Color(0xffFF0500),
                                     fontSize:
@@ -760,7 +760,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           MyMotionToast.error(
             context,
             "Error".tr,
-            "Please try again, Timout",
+            "Please try again".tr,
           );
         },
       );
@@ -768,7 +768,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       MyMotionToast.error(
         context,
         "Error".tr,
-        "Please try again",
+        "Please try again".tr,
       );
     }
   }
@@ -790,7 +790,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       MyMotionToast.error(
         context,
         "Error".tr,
-        "Invalid Otp",
+        "Invalid Otp".tr,
       );
     });
   }
